@@ -1,0 +1,23 @@
+<table>
+  <thead>
+  <tr>
+    <th>id</th>
+    <th>firstName</th>
+    <th>lastName</th>
+    <th>maidenName</th>
+    <th>detail</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let usuario of usuarios">
+      <td>{{usuario.id}}</td>
+      <td>{{usuario.firstName}}</td>
+      <td>{{usuario.lastName}}</td>
+      <td>{{usuario.maidenName}}</td>
+      <td><button routerLink="">Detail</button></td>
+    </tr>
+  </tbody>
+</table>
+
+
+{{usuario | json}}
