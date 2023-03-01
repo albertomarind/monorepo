@@ -5,19 +5,22 @@
     <th>firstName</th>
     <th>lastName</th>
     <th>maidenName</th>
-    <th>detail</th>
+    <th>todos</th>
   </tr>
   </thead>
   <tbody>
     <tr *ngFor="let usuario of usuarios">
-      <td>{{usuario.id}}</td>
-      <td>{{usuario.firstName}}</td>
-      <td>{{usuario.lastName}}</td>
-      <td>{{usuario.maidenName}}</td>
-      <td><button routerLink="">Detail</button></td>
+      <td>{{usuario.usuario.id}}</td>
+      <td>{{usuario.usuario.firstName}}</td>
+      <td>{{usuario.usuario.lastName}}</td>
+      <td>{{usuario.usuario.maidenName}}</td>
+      <td>
+        <ul>
+          <li *ngFor="let todo of usuario.todos">
+            {{todo.todo}}
+          </li>
+        </ul>
+      </td>
     </tr>
   </tbody>
 </table>
-
-
-{{usuario | json}}

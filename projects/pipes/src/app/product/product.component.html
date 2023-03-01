@@ -1,0 +1,12 @@
+<div class="product">
+  <div class="product-header">
+    <img width="120" height="60" [src]="product.image" alt="">
+  </div>
+  <div class="product-body">
+    {{product.name | upperFirstLetter}}
+    {{product.category}}
+  </div>
+  <div class="product-footer">
+    {{product.price}}
+  </div>
+</div>

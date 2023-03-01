@@ -3,7 +3,7 @@ import {UsuariosService} from "../services/usuarios.service";
 import {ResponseUsers} from "../models/response-users.interface";
 import {Usuario} from "../models/usuario.interface";
 import {TareasUsuariosService} from "../services/tareas-usuarios.service";
-import {from, of, switchMap, toArray} from "rxjs";
+import {concatMap, from, of, switchMap, tap, toArray} from "rxjs";
 
 
 @Component({
@@ -12,9 +12,9 @@ import {from, of, switchMap, toArray} from "rxjs";
   styleUrls: ['./usuarios.component.scss']
 })
 export class UsuariosComponent implements OnInit {
-  usuarios: Usuario[] = [];
+  usuarios: any[] = [];
 
-  usuario:any = null;
+  usuario: any = null;
 
   constructor(
     private usuariosService: UsuariosService,
@@ -23,25 +23,33 @@ export class UsuariosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.usuariosService.getUsers().pipe().subscribe({
-      next: (response: ResponseUsers) => {
-        this.usuarios = response.users;
-      }
-    })
-
-    this.usuariosService.getUserById(1).pipe(
-      switchMap((usuario: Usuario) => {
-        return this.tareasUsuariosService.getTareasUsuarios(usuario.id).pipe(
-          switchMap((response: any) => {
-            return of({usuario, todos: response.todos})
-          })
-        );
-      }),
+    this.usuariosService.getUsers().pipe(
+      concatMap((response: ResponseUsers) => from(response.users).pipe(
+        concatMap((usuario: Usuario) => this.tareasUsuariosService.getTareasUsuarios(usuario.id).pipe(
+          concatMap((response: any) => of({usuario, todos: response.todos})),
+        )),
+        toArray()
+      ))
     ).subscribe({
-      next: (response) => {
+      next: (response: any) => {
         console.log(response);
-        this.usuario = response;
+        this.usuarios = response;
       }
-    })
+    });
+
+    // this.usuariosService.getUserById(1).pipe(
+    //   switchMap((usuario: Usuario) => {
+    //     return this.tareasUsuariosService.getTareasUsuarios(usuario.id).pipe(
+    //       switchMap((response: any) => {
+    //         return of({usuario, todos: response.todos})
+    //       })
+    //     );
+    //   }),
+    // ).subscribe({
+    //   next: (response) => {
+    //     console.log(response);
+    //     this.usuario = response;
+    //   }
+    // });
   }
 }
