@@ -8,13 +8,15 @@ import { CustomStructuralDirective } from './custom-structural.directive';
 import { ResaltarDirective } from './resaltar.directive';
 import { CardComponent } from './card/card.component';
 import { BitacoraDirective } from './bitacora.directive';
+import { MyIfDirective } from './my-if.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     ResaltarDirective,
     CardComponent,
-    BitacoraDirective
+    BitacoraDirective,
+    MyIfDirective
   ],
   imports: [
     BrowserModule

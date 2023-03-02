@@ -9,6 +9,8 @@ import { PruebaComponent } from "projects/directives/src/app/prueba/prueba.compo
 })
 export class AppComponent{
 
+  rol:'admin' | 'user'  = 'user';
+
   // @ViewChild(HighlightedDirective)
   // directive!:HighlightedDirective
   //
