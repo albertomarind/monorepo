@@ -50,7 +50,6 @@ export class ResaltarDirective {
     // this.element.nativeElement.style.backgroundColor = 'black';
     // this.element.nativeElement.style.color = 'white';
     this.component.texto = 'nuevo texto desde la directiva';
-
   }
 
   @HostListener('mouseover', ['$event'])
