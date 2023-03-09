@@ -55,7 +55,7 @@ export function ejecutarObservable() {
 
 }
 
-export function getFirstImageFromProducts():Observable<string[]> {
+export function getFirstImageFromProducts(): Observable<string[]> {
   return new Observable<string[]>((subscriber: Subscriber<any>) => {
     try {
       let xhr: XMLHttpRequest = new XMLHttpRequest();
@@ -68,9 +68,9 @@ export function getFirstImageFromProducts():Observable<string[]> {
       subscriber.error('Error')
     }
   }).pipe(
-   // tap((resp) => console.log(resp)),
+    // tap((resp) => console.log(resp)),
     map((resp: any) => JSON.parse(resp).products),
-   // tap((resp) => console.log(resp)),
+    // tap((resp) => console.log(resp)),
     map((resp: any[]) => {
       return resp.map((r: any) => r.images[0]);
     }),
@@ -78,3 +78,21 @@ export function getFirstImageFromProducts():Observable<string[]> {
   );
 }
 
+
+export function customInterval(): Observable<number> {
+  return new Observable<number>((observer: Subscriber<number>) => {
+    let value = 0;
+    let ref = setInterval(() => {
+      console.log(value);
+      observer.next(value);
+      value++;
+     // if (value == 2) {
+        //throw new Error();
+        //observer.error('An error has ocurred');
+      //}
+    }, 1000);
+    return () => {
+      clearInterval(ref);
+    }
+  });
+}

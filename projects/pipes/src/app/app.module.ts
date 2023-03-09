@@ -9,18 +9,21 @@ import { ProductComponent } from './product/product.component';
 import { UpperFirstLetterPipe } from './upper-first-letter.pipe';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CardComponent,
-    FilterByCategoryPipe,
-    ExtraerPropiedadPipe,
-    ProductComponent,
-    UpperFirstLetterPipe
-  ],
-  imports: [
-    BrowserModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        CardComponent,
+        FilterByCategoryPipe,
+        ExtraerPropiedadPipe,
+        ProductComponent,
+        UpperFirstLetterPipe
+    ],
+    imports: [
+        BrowserModule
+    ],
+    providers: [],
+    exports: [
+        ProductComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
