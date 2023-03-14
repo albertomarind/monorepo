@@ -1,0 +1,9 @@
+<div [ngClass]="{
+'info':status === 0,
+'warning':status === 1,
+'danger':status === 2,
+'success':status === 3
+}" *ngIf="show">
+  {{message}}
+  <button (click)="close()">Close</button>
+</div>
